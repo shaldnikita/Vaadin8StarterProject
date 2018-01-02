@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;valo&quot;}">
+  <meta name="vaadin-version" content="8.0.5">
+ </head>
+ <body>
+  <vaadin-horizontal-layout style-name="app-shell" spacing="false" responsive size-full style-descr="app-shell">
+   <vaadin-css-layout style-name="navigation-bar-container" width="170px" height-full style-descr="">
+    <vaadin-css-layout style-name="navigation-bar" size-full style-descr="">
+     <vaadin-label style-name="logo" width-full style-descr="" plain-text _id="projectNameLabel">
+       Тэги 
+     </vaadin-label>
+     <vaadin-label style-name="activeViewName" style-descr="activeViewName" plain-text _id="activeViewName">
+       Раздел 
+     </vaadin-label>
+     <vaadin-button icon="fonticon://FontAwesome/f0c9" style-name="menu borderless" id="menuButton" style-descr="" plain-text _id="menuButton">
+       Меню 
+     </vaadin-button>
+     <vaadin-css-layout style-name="navigation" id="menu" width-full style-descr="" _id="menu">
+      <vaadin-button icon="fonticon://Vaadin-Icons/e80d" style-name="borderless" id="profileButton" width="150px" style-descr="" plain-text _id="profileButton">
+        Профиль 
+      </vaadin-button>
+      <vaadin-button icon="fonticon://Vaadin-Icons/e7a8" style-name="borderless" id="table" width="150px" plain-text _id="table">
+        Записаться 
+      </vaadin-button>
+      <vaadin-button icon="fonticon://Vaadin-Icons/e60c" style-name="borderless" id="logoutButton" width="150px" style-descr="" plain-text _id="logout">
+        Выход 
+      </vaadin-button>
+     </vaadin-css-layout>
+    </vaadin-css-layout>
+   </vaadin-css-layout>
+   <vaadin-vertical-layout style-name="content-container v-scrollable" id="content" size-full margin="false" _id="content" :expand></vaadin-vertical-layout>
+  </vaadin-horizontal-layout>
+ </body>
+</html>
