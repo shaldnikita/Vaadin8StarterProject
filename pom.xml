@@ -3,32 +3,28 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>ru.shaldnikita</groupId>
-	<artifactId>myapp</artifactId>
+	<groupId>ru.cwt</groupId>
+	<artifactId>monitoring</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.4.RELEASE</version>
+		<version>1.5.9.RELEASE</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<packaging>jar</packaging>
 
 	<properties>
-		<vaadin.version>8.1.5</vaadin.version>
-		<vaadin-spring.version>2.1.0.beta2</vaadin-spring.version>
+		<vaadin.version>8.2.0</vaadin.version>
+		<vaadin-spring.version>LATEST</vaadin-spring.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
-		<org.vaadin.spring.version>0.0.7.RELEASE</org.vaadin.spring.version>
+		<org.vaadin.spring.version>LATEST</org.vaadin.spring.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<vaadin.widgetset.mode>fetch</vaadin.widgetset.mode>
-
-		<!-- Overrides for Spring Boot dependencies -->
-		<selenium.version>3.4.0</selenium.version>
-		<selenium-htmlunit.version>2.26</selenium-htmlunit.version>
 	</properties>
 
 	<repositories>
@@ -57,7 +53,6 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -77,23 +72,21 @@
 			<version>LATEST</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
             <version>LATEST</version>
         </dependency>
 
 		<dependency>
-			<groupId>com.google.firebase</groupId>
-			<artifactId>firebase-admin</artifactId>
-			<version>5.5.0</version>
-		</dependency>
-
-       <!-- <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version></version>
         </dependency>
--->
 
 
 		<dependency>
@@ -115,17 +108,17 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
-			<version>${vaadin-spring.version}</version><!--$NO-MVN-MAN-VER$ -->
+			<version>${vaadin-spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot</artifactId>
-			<version>${vaadin-spring.version}</version><!--$NO-MVN-MAN-VER$ -->
+			<version>${vaadin-spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring</artifactId>
-			<version>${vaadin-spring.version}</version><!--$NO-MVN-MAN-VER$ -->
+			<version>${vaadin-spring.version}</version>
 		</dependency>
 
 		<dependency>
@@ -134,16 +127,6 @@
 			<version>${vaadin-spring.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.vaadin.tapio</groupId>
-			<artifactId>googlemaps</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.vaadin.addon</groupId>
-			<artifactId>confirmdialog</artifactId>
-			<version>3.1.2</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -174,6 +157,12 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+
+		<dependency>
 			<groupId>org.vaadin.spring.addons</groupId>
 			<artifactId>vaadin-spring-addon-eventbus</artifactId>
 			<version>${org.vaadin.spring.version}</version>
@@ -184,69 +173,64 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
-        <!--<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.39</version>
-        </dependency>
--->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
 
     </dependencies>
 
 	<build>
 		<plugins>
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <version>${vaadin.plugin.version}</version>
-                <dependencies>
-                    <!-- For Travis -->
-                    <dependency>
-                        <groupId>xml-apis</groupId>
-                        <artifactId>xml-apis</artifactId>
-                        <version>1.4.01</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <extraJvmArgs>-Xmx2G</extraJvmArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>update-theme</goal>
-                            <goal>update-widgetset</goal>
-                            <goal>compile</goal>
-                            <goal>compile-theme</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>update-theme</goal>
+							<goal>update-widgetset</goal>
+							<goal>compile</goal>
+							<!-- Comment out compile-theme goal to use on-the-fly theme compilation -->
+							<goal>compile-theme</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-			<!--<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
 				<executions>
 					<execution>
-						<id>enforce-no-snapshots</id>
+						<id>copy-resources</id>
+						<phase>validate</phase>
 						<goals>
-							<goal>enforce</goal>
+							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<rules>
-								<requireReleaseDeps>
-									<message>No Snapshots Allowed!</message>
-								</requireReleaseDeps>
-							</rules>
-							<fail>true</fail>
+							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 		</plugins>
+
 	</build>
 
 
